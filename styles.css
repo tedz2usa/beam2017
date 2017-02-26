@@ -5,3 +5,10 @@ body {
 canvas {
   border: 1px solid gray;
 }
+
+table {
+  width: 400px;
+  margin: 20px auto;
+  text-align: left;
+}
+

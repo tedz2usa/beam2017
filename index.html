@@ -8,5 +8,33 @@
   <body>
     <h1>My Beam Bending Simulation</h1>
     <canvas id="myCanvas" width="600" height="400"></canvas>
+    
+    <h2>Input Settings</h2>
+    <table>
+      <tr>
+        <td>Force (N): </td>
+        <td><input id="inputForce" value="300000"></td>
+      </tr>
+      <tr>
+        <td>Beam Length (m): </td>
+        <td><input id="inputLength" value="0.5"></td>
+      </tr>
+      <tr>
+        <td>Elasticity (GPa): </td>
+        <td><input id="inputElasticity" value="70"></td>
+      </tr>
+      <tr>
+        <td>Beam X Width (m): </td>
+        <td><input id="inputBeamWidth" value="0.1"></td>
+      </tr>
+      <tr>
+        <td>Beam X Height: </td>
+        <td><input id="inputBeamHeight" value="0.06"></td>
+      </tr>
+    </table>
+    <button onclick="get_input_settings()">Set</button>
+
+    
+    
   </body>
 </html>
