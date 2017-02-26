@@ -6,27 +6,38 @@ var canvas, ctx, xMin, xMax, xScale, yMin, yMax, yScale;
 var gridSpacing, canvasWidth, canvasHeight;
 var originXOffset, originYOffset, tickLength;
 
+var P, L, E, B, H, I, A, max_deflection;
 
 function init() {
   canvas = getDom("myCanvas");
   ctx = canvas.getContext("2d");
 
+  inputForce = getDom("inputForce");
+  inputLength = getDom("inputLength");
+  inputElasticity = getDom("inputElasticity");
+  inputBeamWidth = getDom("inputBeamWidth");
+  inputBeamHeight = getDom("inputBeamHeight");
+  
+  
+  
   canvasWidth = canvas.width;
   canvasHeight = canvas.height;
   originXOffset = 100;
   originYOffset = 300;
   tickLength = 4;
 
-  xMin = -10;
-  xMax = 10;
-  yMin = -10;
-  yMax = 10;
+  xMin = -0.1;
+  xMax = 0.6;
+  yMin = -0.3;
+  yMax = 0.3;
 
   xScale = canvasWidth / (xMax-xMin);
   yScale = canvasHeight / (yMax-yMin);
   
-  xGridSpace = 0.5;
-  yGridSpace = 0.5;
+  xGridSpace = 0.1;
+  yGridSpace = 0.1;
+
+  get_input_settings();
 
   draw();
 }
@@ -36,9 +47,12 @@ function draw() {
 
   print_x_axis();
   print_y_axis();
+  
+  var increment = 1 / xScale;
 
-  for (var x = -20; x < 20; x+=0.01) {
-    var y = x * x;
+  for (var x = 0; x < L; x+=increment) {
+    var y = P * x * x / (6 * E * I) * (3 * L - x);
+    // log(y);
     print_dot( tx(x), ty(y) );
   }
 
@@ -101,6 +115,21 @@ function print_y_tick(y) {
   }
 }
 
+function get_input_settings() {
+  
+  P = -parseFloat(inputForce.value);
+  L = parseFloat(inputLength.value);
+  E = parseFloat(inputElasticity.value);
+  
+  B = parseFloat(inputBeamWidth.value);
+  H = parseFloat(inputBeamHeight.value);
+  I = B * H * H * H / 12;
+  A = L;
+
+  log("input settings");
+  log(P, L, E, B, H, I, A);
+  
+}
 
 
 
